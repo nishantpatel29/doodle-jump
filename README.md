@@ -67,13 +67,7 @@ No build tools or servers required — it's pure frontend!
 | `↓` or `S`  | Fast fall (dive)     |
 | `Spacebar`  | Restart after Game Over |
 
----
-
-## 📸 Screenshot
-
-> Add a screenshot here if possible (e.g., `assets/screenshot.png`).
-
-
+--
 
 ## 📌 Known Issues / TODOs
 
