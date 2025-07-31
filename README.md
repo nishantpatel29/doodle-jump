@@ -7,7 +7,7 @@ A simple **Doodle Jump** clone built using **HTML5 Canvas** and **JavaScript**. 
 ## 🚀 Live Demo
 
 > You can run it locally , or upload the project folder to any static web server to play instantly.
-
+demo - https://nishant-doodlejumpp.netlify.app/
 ---
 
 ## 🎮 Game Features
@@ -73,7 +73,6 @@ No build tools or servers required — it's pure frontend!
 
 > Add a screenshot here if possible (e.g., `assets/screenshot.png`).
 
----
 
 
 ## 📌 Known Issues / TODOs
