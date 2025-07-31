@@ -8,14 +8,15 @@ doodlerY = main_height * 7 / 8 - doodlerHeight / 2;
 //physics
 velocityX = 0;
 velocityY=0;     //doodler jump speed
-initialvelocityY=-4.5;
-g=0.12;
+initialvelocityY=-4.2;
+g=0.1;
 
 
 //score
 score=0;
 Maxscore=0;
 gameover=false;
+let landedPlatforms = new Set(); // Track platforms that have been landed on
 
 
 //platforms
@@ -78,12 +79,20 @@ function update() {
     //platform
     for (i = 0; i < platformArray.length; i++) {
         let platform = platformArray[i];
-        if(velocityY<0 && doodler.y<main_height*2/4){
-            platform.y-=initialvelocityY;  //slide platform down
-            // newPlatform(); 
+        if(velocityY<0 && doodler.y<main_height*3/8){
+            platform.y-=initialvelocityY;  //slide platform down at half speed
         }
         if(detectCollision(doodler,platformArray[i]) &&velocityY>0){
             velocityY=initialvelocityY;  //jump
+            // Add platform to landed set and update score
+            let platformKey = `${platformArray[i].x}-${platformArray[i].y}`;
+            if (!landedPlatforms.has(platformKey)) {
+                landedPlatforms.add(platformKey);
+                score += 10;
+                if (score > Maxscore) {
+                    Maxscore = score;
+                }
+            }
         }
        
         context.drawImage(platform.img, platform.x, platform.y, platform.width, platform.height);
@@ -92,7 +101,7 @@ function update() {
         platformArray.shift();  //removes first element from array
         newPlatform();
     }
-    updateScore();            //score
+    // Score is now updated when landing on platforms, not here
     context.fillStyle="black";
     context.font="16px sans-serif";
     context.fillText(score,5,20);
@@ -120,10 +129,10 @@ moveDoodler = (e) => {
     }
     // reset 
     else if(e.code=="Space" && gameover){
-    
        gameover=false;
-
-       
+       score = 0;
+       Maxscore = 0;
+       landedPlatforms.clear(); // Reset landed platforms for new game
     }
 
 }
@@ -166,15 +175,4 @@ function newPlatform(){
     a.y<b.y+b.height &&          //a's top left  corner doesn't reach b's bottom left corner
     a.y+a.height>b.y;            //a's bottom left corner  passes b's top left corner
 }
-function updateScore(){
-points=10;
-if(velocityY<0){
-    Maxscore+=points;
-    if(score<Maxscore){
-        score=Maxscore;
-    }
-}
-else if(velocityY>=0){
-    Maxscore-=points;
-}
-}
+// Removed the old updateScore function as scoring is now handled when landing on platforms
