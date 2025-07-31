@@ -73,7 +73,7 @@ No build tools or servers required — it's pure frontend!
 
 - Score persists only until the game is open
 - Platform collision may feel basic
-- Score issue
+
 
 ---
 
